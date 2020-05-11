@@ -102,8 +102,8 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DBNAME', 'git_analytic'),
         'USER': os.getenv('POSTGRES_USER', 'lam'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'Hoanganhlam@no99'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        'HOST': os.getenv('POSTGRES_HOST', '198.13.35.118'),
+        'PORT': os.getenv('POSTGRES_PORT', '5433'),
     }
 }
 
