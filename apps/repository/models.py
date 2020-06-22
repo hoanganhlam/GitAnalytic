@@ -45,7 +45,7 @@ class GitUser(BaseModel):
     git_id = models.IntegerField(null=True, blank=True)
     full_name = models.CharField(max_length=200, null=True, blank=True)
     avatar_url = models.CharField(max_length=200, null=True, blank=True)
-    email = models.CharField(max_length=200, null=True, blank=True),
+    email = models.CharField(max_length=200, null=True, blank=True)
     links = JSONField(null=True, blank=True)
 
 
@@ -78,6 +78,7 @@ class Repository(BaseModel):
     description = models.CharField(max_length=500, null=True, blank=True)
     options = JSONField(null=True, blank=True)
     point = models.FloatField(default=0)
+    date_published = models.DateTimeField(default=timezone.now)
 
     read_me = models.TextField(null=True, blank=True)
     id_github = models.CharField(max_length=300, null=True, blank=True)
@@ -92,3 +93,4 @@ class Repository(BaseModel):
 
     author = models.ForeignKey(GitUser, related_name="repositories", null=True, blank=True, on_delete=models.CASCADE)
     taxonomies = models.ManyToManyField(Taxonomy, related_name="repositories", blank=True)
+    contributes = models.ManyToManyField(GitUser, related_name="contribute_repositories", blank=True)

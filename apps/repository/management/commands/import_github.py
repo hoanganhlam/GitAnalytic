@@ -43,8 +43,8 @@ def save_data(obj, score, search):
 
 
 def fetch_data(f, search):
-    headers = {'Accept': 'application/vnd.github.mercy-preview+json'}
-    uri = "https://api.npms.io/v2/search"
+    headers = {'origin': 'x-requested-with'}
+    uri = "https://cors-anywhere.herokuapp.com/https://api.npms.io/v2/search"
     params = {
         "q": search,
         # "page": 1,
@@ -57,14 +57,16 @@ def fetch_data(f, search):
         params=params,
         headers=headers
     )
-    data = r.json()
-    items = [] if data is None else data.get("results")
-    for item in items:
-        save_data(item.get("package"), item.get("score"), search)
-    if data.get("total") > f + 10:
-        fetch_data(f + 10, search)
+    print(r.status_code)
+    if r.status_code == 200:
+        data = r.json()
+        items = [] if data is None else data.get("results")
+        for item in items:
+            save_data(item.get("package"), item.get("score"), search)
+        if data.get("total") > f + 10:
+            fetch_data(f + 10, search)
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        fetch_data(0, "Vue Auth")
+        fetch_data(0, "Vue Loader")

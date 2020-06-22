@@ -1,13 +1,14 @@
-from django.core.management.base import BaseCommand
-from apps.repository.models import Repository, Taxonomy, GitUser
-from utils.slug import _slug_strip, vi_slug
-from django.db.models import Q
 import requests
+from django.core.management.base import BaseCommand
+from django.db.models import Q
+
+from apps.repository.models import Repository, GitUser
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         q = ~Q(id_github=None) | Q(id_github='')
+        q = q & Q(taxonomies__slug="vue-loader")
         queryset = Repository.objects.filter(q)
         for repo in queryset:
             url = repo.id_github.replace("https://github.com/", "")

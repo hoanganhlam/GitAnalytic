@@ -1,37 +1,123 @@
 {
-  "downloads": [
-    {
-      "to": "2020-05-09T00:00:00.000Z",
-      "from": "2020-05-08T00:00:00.000Z",
-      "count": 798
+    "date": "2020-05-09T14:30:26.969Z",
+    "name": "vue-willtable",
+    "links": {
+        "npm": "https://www.npmjs.com/package/vue-willtable",
+        "bugs": "https://github.com/KevinMint55/vue-willtable/issues",
+        "homepage": "https://github.com/KevinMint55/vue-willtable#readme",
+        "repository": "https://github.com/KevinMint55/vue-willtable"
     },
-    {
-      "to": "2020-05-09T00:00:00.000Z",
-      "from": "2020-05-02T00:00:00.000Z",
-      "count": 3783
+    "scope": "unscoped",
+    "author": {
+        "url": "https://www.willwuwei.com",
+        "name": "WillWu",
+        "email": "innovation55@foxmail.com"
     },
-    {
-      "to": "2020-05-09T00:00:00.000Z",
-      "from": "2020-04-09T00:00:00.000Z",
-      "count": 17958
+    "readme": "# vue-willtable可编辑的表格组件\r\n\r\n适用于Vue的可编辑的表格组件，支持多种快捷键操作，模拟Excel的操作体验\r\n\r\nDemo here: https://demo.willwuwei.com/willtable/\r\n\r\n基于该组件实现的多人实时在线编辑表格系统: https://castle.willwuwei.com\r\n\r\n![image](https://qiniu.willwuwei.com/willtable1.gif)\r\n\r\n![image](https://qiniu.willwuwei.com/willtable2.gif)\r\n\r\n## Features\r\n\r\n- 表格宽度调整\r\n- 表格列固定\r\n- 数据过滤与筛选\r\n- 行多选\r\n- 批量框选删除与复制粘贴\r\n- 可与Excel互相复制粘贴\r\n- 数据下拉复制\r\n- 下拉复制与框选单元格拖动超过表格区域时自动滚动\r\n- 获取改变的数据行\r\n- 多种数据类型校验\r\n- 支持自定义规则数据校验\r\n- 获取校验非法的数据行\r\n- 支持撤销与重做\r\n- 可自定义每个单元格样式与类名\r\n- 使用局部渲染，支持更大量数据的展示\r\n\r\n## Installation\r\n\r\n```\r\nnpm install vue-willtable --save\r\n```\r\n\r\n## Mount\r\n\r\n### mount with global\r\n\r\n``` javascript\r\nimport Vue from 'vue'\r\nimport VueWilltable from 'vue-willtable'\r\n\r\n// require styles\r\nimport 'vue-willtable/dist/vue-willtable.min.css'\r\n\r\nVue.component('VueWilltable', VueWilltable)\r\n```\r\n\r\n### mount with component\r\n\r\n``` javascript\r\nimport VueWilltable from 'vue-willtable'\r\n\r\n// require styles\r\nimport 'vue-willtable/dist/vue-willtable.min.css'\r\n\r\nexport default {\r\n  components: {\r\n    VueWilltable\r\n  }\r\n}\r\n```\r\n\r\n## Usage\r\n\r\n```vue\r\n<template>\r\n  <willtable\r\n    ref=\"willtable\"\r\n    :columns=\"columns\"\r\n    maxHeight=\"800\" />\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  data() {\r\n    return {\r\n      columns: [\r\n        {\r\n          type: 'selection',\r\n          width: 40,\r\n          fixed: true,\r\n        },\r\n        {\r\n          title: '序号',\r\n          key: 'sid',\r\n          fixed: true,\r\n          type: 'number',\r\n          width: 100,\r\n        },\r\n        {\r\n          title: '姓名',\r\n          key: 'name',\r\n          fixed: true,\r\n          width: 120,\r\n        },\r\n        {\r\n          title: '日期',\r\n          key: 'date',\r\n          type: 'date',\r\n          width: 100,\r\n        },\r\n        {\r\n          title: '工作岗位',\r\n          key: 'email',\r\n          width: 300,\r\n          type: 'select',\r\n          options: [\r\n            {\r\n              value: 'Web前端开发',\r\n              label: 'Web前端开发',\r\n            },\r\n            {\r\n              value: 'Java开发',\r\n              label: 'Java开发',\r\n            },\r\n            {\r\n              value: 'Python开发',\r\n              label: 'Python开发',\r\n            },\r\n            {\r\n              value: 'Php开发',\r\n              label: 'Php开发',\r\n            },\r\n          ],\r\n        },\r\n        {\r\n          title: '月份',\r\n          key: 'month',\r\n          type: 'month',\r\n          width: 100,\r\n        },\r\n        {\r\n          title: '地址',\r\n          key: 'address',\r\n          width: 200,\r\n        },\r\n        {\r\n          title: '标题',\r\n          key: 'title',\r\n          width: 300,\r\n        },\r\n        {\r\n          title: '内容',\r\n          key: 'paragraph',\r\n          width: 300,\r\n        },\r\n        {\r\n          title: '链接',\r\n          key: 'url',\r\n          width: 200,\r\n        },\r\n        {\r\n          title: 'ip',\r\n          key: 'ip',\r\n          width: 200,\r\n          validate: (value) => {\r\n            const pattern = /((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}/g;\r\n            return pattern.test(value);\r\n          },\r\n        },\r\n        {\r\n          title: '总金额',\r\n          key: 'sum',\r\n          width: 200,\r\n        },\r\n        {\r\n          title: 'ID',\r\n          key: 'id',\r\n          width: 200,\r\n        },\r\n        {\r\n          title: '色值',\r\n          key: 'color',\r\n          width: 200,\r\n        },\r\n      ],\r\n    },\r\n  },\r\n  mounted() {\r\n    this.getData();\r\n  },\r\n  methods: {\r\n    getData() {\r\n      const data = [];\r\n      this.$refs.willtable.setData(data);\r\n    },\r\n  },\r\n};\r\n</script>\r\n```\r\n\r\n### Value-Binding\r\n\r\nthis.$refs.willtable调用setData方法来更新整表数据，并会重置历史数据记录\r\n\r\n### Attributes\r\n\r\n参数 | 说明 | 类型 | 可选值 | 默认值\r\n---|---|---|---|---\r\ncolumns | 表格列的配置描述 | Array | —— | []\r\nmaxHeight | 表格最大高度 | string / number  | —— | ——\r\nrowHeight | 每行高度 | string / number | —— | ——\r\ndisabled | 是否禁止编辑 | Boolean  | —— | true\r\nshowIcon | 是否显示表头类型图标 | Boolean  | —— | false\r\ncellStyle | 单元格的 style 的回调方法 | Function({row, column, rowIndex, columnIndex}) | —— | ——\r\ncellClassName | 单元格的 className 的回调方法 | Function({row, column, rowIndex, columnIndex})  | —— | ——\r\n\r\n### Events\r\n\r\n事件名称 | 说明 | 回调参数\r\n---|---|---\r\nselection-change | 当选择项发生变化时会触发该事件 | selection\r\n\r\n### Methods\r\n\r\n方法名 | 说明 | 参数\r\n---|---|---\r\ngetData | 用来获取数据，返回当前表格数据 | ——\r\nsetData | 用来设置数据，更新初始数据来判断改变数据 | data \r\ngetChangeData | 获取变化的数据行 | ——\r\ngetErrorRows | 获取校验错误的数据和索引 | ——\r\naddItem | 底部添加一行数据 | item\r\nremoveItems | 批量删除，参数key为每行的唯一标识属性如id，values为该标识属性的数组 | key, values\r\n\r\n### Columns-Attributes\r\n\r\n参数 | 说明 | 类型 | 可选值 | 默认值\r\n---|---|---|---|---\r\nkey | 对应列内容的字段名 | String | —— | ——\r\ntitle | 列头显示文字 | String | —— | ——\r\nwidth | 列宽度 | String / Number | —— | ——\r\ntype | 列类型 | String | selection/number/date/select/month | ——\r\nformat | number类型是否格式化千分号 | Boolean | —— | true\r\noptions | select下拉选项 | Array | { value: '值', label: '显示文字' } | ——\r\nfixed | 是否固定在左侧 | Boolean | —— | false\r\naction | 是否启用过滤和筛选 | Boolean | —— | false\r\ndisabled | 是否禁止编辑 | Boolean | —— | false\r\nnoVerify | 是否禁用校验 | Boolean | —— | false\r\nvalidate | 自定义校验 | Function(value) | —— | ——\r\n\r\n### Shortcut\r\n\r\n快捷键 | 说明\r\n---|---\r\n方向键 | 编辑框上下左右移动\r\nCtrl + C | 粘贴\r\nCtrl + V | 复制\r\nCtrl + A | 单元格全选\r\nCtrl + Z | 撤销\r\nCtrl + Y | 重做\r\nEnter | 单元格编辑/完成单元格编辑\r\nDelete、Backspace | 删除\r\n\r\n## Author\r\n\r\n[WillWu](https://www.willwuwei.com)",
+    "license": "MIT",
+    "version": "2.0.1",
+    "keywords": [
+        "vue-willtable",
+        "vue editable table",
+        "vue component",
+        "vue"
+    ],
+    "releases": [
+        {
+            "to": "2020-05-09T00:00:00.000Z",
+            "from": "2020-04-09T00:00:00.000Z",
+            "count": 0
+        },
+        {
+            "to": "2020-05-09T00:00:00.000Z",
+            "from": "2020-02-09T00:00:00.000Z",
+            "count": 0
+        },
+        {
+            "to": "2020-05-09T00:00:00.000Z",
+            "from": "2019-11-11T00:00:00.000Z",
+            "count": 0
+        },
+        {
+            "to": "2020-05-09T00:00:00.000Z",
+            "from": "2019-05-10T00:00:00.000Z",
+            "count": 6
+        },
+        {
+            "to": "2020-05-09T00:00:00.000Z",
+            "from": "2018-05-10T00:00:00.000Z",
+            "count": 6
+        }
+    ],
+    "publisher": {
+        "email": "943642973@qq.com",
+        "username": "kevinmint"
     },
-    {
-      "to": "2020-05-09T00:00:00.000Z",
-      "from": "2020-02-09T00:00:00.000Z",
-      "count": 46162
+    "repository": {
+        "url": "git+https://github.com/KevinMint55/vue-willtable.git",
+        "type": "git"
     },
-    {
-      "to": "2020-05-09T00:00:00.000Z",
-      "from": "2019-11-11T00:00:00.000Z",
-      "count": 80235
+    "description": "An editable table component for Vue",
+    "maintainers": [
+        {
+            "email": "943642973@qq.com",
+            "username": "kevinmint"
+        }
+    ],
+    "devDependencies": {
+        "ora": "^4.0.2",
+        "vue": "^2.6.10",
+        "axios": "^0.19.0",
+        "chalk": "^2.4.2",
+        "eslint": "^6.5.1",
+        "mockjs": "^1.0.1-beta3",
+        "webpack": "^4.41.2",
+        "node-sass": "^4.12.0",
+        "stylelint": "^11.1.1",
+        "css-loader": "^3.2.0",
+        "element-ui": "^2.12.0",
+        "url-loader": "^2.2.0",
+        "vue-loader": "^15.7.1",
+        "@babel/core": "^7.6.4",
+        "file-loader": "^4.2.0",
+        "sass-loader": "^8.0.0",
+        "webpack-cli": "^3.3.9",
+        "autoprefixer": "^9.6.5",
+        "babel-eslint": "^10.0.3",
+        "babel-loader": "^8.0.6",
+        "style-loader": "^1.0.0",
+        "eslint-loader": "^3.0.2",
+        "webpack-merge": "^4.2.2",
+        "babel-polyfill": "^6.26.0",
+        "postcss-import": "^12.0.1",
+        "postcss-loader": "^3.0.0",
+        "babel-preset-env": "^1.7.0",
+        "vue-style-loader": "^4.1.2",
+        "@babel/preset-env": "^7.6.3",
+        "eslint-plugin-vue": "^5.2.3",
+        "webpack-dev-server": "^3.8.2",
+        "html-webpack-plugin": "^3.2.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "eslint-plugin-import": "^2.18.2",
+        "vue-template-compiler": "^2.6.10",
+        "babel-plugin-component": "^1.1.1",
+        "better-webpack-progress": "^1.1.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "uglifyjs-webpack-plugin": "^2.2.0",
+        "webpack-bundle-analyzer": "^3.5.2",
+        "stylelint-processor-html": "^1.0.0",
+        "stylelint-webpack-plugin": "^1.0.2",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-friendly-formatter": "^4.0.1",
+        "stylelint-config-standard": "^19.0.0",
+        "eslint-import-resolver-webpack": "^0.11.1",
+        "friendly-errors-webpack-plugin": "^1.7.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/plugin-proposal-class-properties": "^7.5.5"
     },
-    {
-      "to": "2020-05-09T00:00:00.000Z",
-      "from": "2019-05-10T00:00:00.000Z",
-      "count": 164126
+    "peerDependencies": {
+        "vue": "^2.6.10",
+        "element-ui": "^2.12.0"
     }
-  ],
-  "starsCount": 1,
-  "downloadsCount": 164126,
-  "dependentsCount": 0
 }

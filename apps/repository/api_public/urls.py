@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^repositories/$', views.list_repository),
     url(r'^repositories/(?P<pk>[0-9]+)/$', views.detail_repository),
+    url(r'^repositories/(?P<pk>[0-9]+)/related$', views.related_repository),
+    url(r'^repositories/(?P<pk>[0-9]+)/contributors$', views.repository_contributors),
     url(r'^taxonomies/$', views.list_taxonomy),
     path('taxonomies/<slug:slug>/', views.detail_taxonomy),
 ]

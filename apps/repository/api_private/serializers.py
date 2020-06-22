@@ -29,8 +29,7 @@ class MediaSerializer(serializers.ModelSerializer):
         if instance.path:
             return {
                 "thumb_64_64": get_thumbnail(instance.path, '64x64', crop='center', quality=100).url,
-                "thumb_640_250": get_thumbnail(instance.path, '640x250', crop='center', quality=100).url,
-                "thumb_325_150": get_thumbnail(instance.path, '325x150', crop='center', quality=100).url
+                "thumb_220_220": get_thumbnail(instance.path, '220x220', crop='center', quality=100).url,
             }
         else:
             return {}

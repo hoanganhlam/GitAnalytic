@@ -2,7 +2,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from utils.other import get_paginator
 from django.db import connection
-from apps.repository.models import Taxonomy
+from apps.repository.models import Taxonomy, Repository
+from apps.repository.api_public.serializers import RepositorySerializer
+from apps.repository.api_private.serializers import GitUserSerializer
 
 
 def get_all_taxonomies(q_taxonomies):
@@ -44,6 +46,19 @@ def detail_repository(request, pk):
         cursor.execute("SELECT FETCH_REPOSITORY(%s)", [pk])
         out = cursor.fetchone()[0]
     return Response(out)
+
+
+@api_view(['GET'])
+def related_repository(request, pk):
+    repo = Repository.objects.get(pk=int(pk))
+    query = Repository.objects.filter(taxonomies__in=repo.taxonomies.all()).order_by('?')[:8]
+    return Response(RepositorySerializer(query, many=True).data)
+
+
+@api_view(['GET'])
+def repository_contributors(request, pk):
+    repo = Repository.objects.get(pk=int(pk))
+    return Response(GitUserSerializer(repo.contributes.all(), many=True).data)
 
 
 @api_view(['GET'])
